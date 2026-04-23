@@ -4,7 +4,7 @@ import { defineConfig } from "vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/ilab-sep-dash/",
+  base: "/progress-dashboard/",
   plugins: [react()],
   resolve: {
     alias: {
