@@ -35,7 +35,7 @@ export function Layout({
           <div className="flex items-center gap-8">
             <Link to="/" className="group flex items-center gap-3">
               <img
-                src="/ccds_innovation_lab_logo.jpeg"
+                src={`${import.meta.env.BASE_URL}ccds_innovation_lab_logo.jpeg`}
                 alt="Innovation Lab @ NTU CCDS"
                 className="h-9 w-9 rounded-sm object-cover ring-1 ring-ink/20"
               />

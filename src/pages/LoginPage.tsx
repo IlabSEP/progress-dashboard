@@ -22,7 +22,7 @@ function Masthead() {
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-6 py-5">
         <div className="flex items-center gap-3">
           <img
-            src="/ccds_innovation_lab_logo.jpeg"
+            src={`${import.meta.env.BASE_URL}ccds_innovation_lab_logo.jpeg`}
             alt="Innovation Lab @ NTU CCDS"
             className="h-10 w-10 rounded-sm object-cover ring-1 ring-ink/20"
           />
@@ -362,7 +362,7 @@ function Colophon() {
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-10 md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-3">
           <img
-            src="/ccds_innovation_lab_logo.jpeg"
+            src={`${import.meta.env.BASE_URL}ccds_innovation_lab_logo.jpeg`}
             alt=""
             aria-hidden
             className="h-8 w-8 rounded-sm object-cover ring-1 ring-ink/20"
