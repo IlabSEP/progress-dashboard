@@ -67,9 +67,6 @@
     background: #EFE8D6;
   }
 
-  form .react-colorful {
-    @apply w-full
-  }
 }
 
 @layer utilities {
