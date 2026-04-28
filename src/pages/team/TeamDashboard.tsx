@@ -26,13 +26,6 @@ function formatLongDate(ts: number) {
   });
 }
 
-function issueNumber(ts: number) {
-  const start = new Date(new Date(ts).getFullYear(), 0, 0);
-  const diff = ts - start.getTime();
-  const day = Math.floor(diff / (1000 * 60 * 60 * 24));
-  return String(day).padStart(3, "0");
-}
-
 export function TeamDashboard() {
   const user = useQuery(api.users.viewer);
   const timeline = useQuery(api.updates.getTimelineForMyTeam);
@@ -57,11 +50,8 @@ export function TeamDashboard() {
         <div className="container max-w-5xl px-6 py-12">
           {/* Masthead */}
           <header className="animate-rise" style={{ animationDelay: "40ms" }}>
-            <div className="flex items-baseline justify-between gap-6 border-b-2 border-ink pb-3">
+            <div className="border-b-2 border-ink pb-3">
               <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-ink/60">
-                Field Report · Issue № {issueNumber(now)}
-              </p>
-              <p className="hidden font-mono text-[10px] uppercase tracking-[0.32em] text-ink/60 sm:block">
                 {formatLongDate(now)}
               </p>
             </div>
@@ -194,7 +184,7 @@ export function TeamDashboard() {
             style={{ animationDelay: "600ms" }}
           >
             <p className="text-center font-mono text-[10px] uppercase tracking-[0.32em] text-ink/40">
-              Innovation Lab · NTU CCDS · Published from the dashboard press
+              Innovation Lab · NTU CCDS
             </p>
           </footer>
         </div>

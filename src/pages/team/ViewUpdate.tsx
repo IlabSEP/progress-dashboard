@@ -40,11 +40,6 @@ export function ViewUpdate() {
           >
             ← Back to the dashboard
           </Link>
-          <header className="border-b-2 border-ink pb-3">
-            <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-ink/60">
-              Field Report · Single Entry
-            </p>
-          </header>
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-vermilion">
               Filed entry

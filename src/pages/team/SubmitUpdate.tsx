@@ -13,12 +13,7 @@ export function SubmitUpdate() {
     <div className="bg-cream-paper text-ink-deep">
       <div className="paper-texture">
         <div className="container max-w-3xl px-6 py-12">
-          <header className="border-b-2 border-ink pb-3">
-            <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-ink/60">
-              Field Report · New Entry
-            </p>
-          </header>
-          <div className="mt-6 flex flex-wrap items-end justify-between gap-4">
+          <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-vermilion">
                 {editableUpdate ? "Editing draft" : "File an update"}

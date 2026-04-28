@@ -37,7 +37,7 @@ export function UpdateRequestBanner() {
               <div className="space-y-4">
                 <div className="flex items-center gap-3 text-vermilion-deep">
                   <span className="font-mono text-[10px] uppercase tracking-[0.28em]">
-                    Request № {String(idx + 1).padStart(2, "0")}
+                    Request {String(idx + 1).padStart(2, "0")}
                   </span>
                   <span className="h-px w-10 bg-vermilion/50" />
                   <span className="font-mono text-[10px] uppercase tracking-[0.28em] font-semibold">

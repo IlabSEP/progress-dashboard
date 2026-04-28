@@ -201,11 +201,6 @@ export function TeamProfile() {
     <div className="bg-cream-paper text-ink-deep">
       <div className="paper-texture">
         <div className="container max-w-2xl px-6 py-12 space-y-10">
-          <header className="border-b-2 border-ink pb-3">
-            <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-ink/60">
-              Field Report · Masthead
-            </p>
-          </header>
           <div>
             <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-vermilion">
               Team record

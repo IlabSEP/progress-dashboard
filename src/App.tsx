@@ -2,6 +2,7 @@ import { Layout } from "@/Layout";
 import { RoleRedirect } from "@/components/RoleRedirect";
 import { RoleGuard } from "@/components/RoleGuard";
 import { LoginPage } from "@/pages/LoginPage";
+import { SignInPage } from "@/pages/SignInPage";
 import { TeamDashboard } from "@/pages/team/TeamDashboard";
 import { SubmitUpdate } from "@/pages/team/SubmitUpdate";
 import { TeamProfile } from "@/pages/team/TeamProfile";
@@ -27,6 +28,7 @@ export default function App() {
       </Authenticated>
       <Unauthenticated>
         <Routes>
+          <Route path="/signin" element={<SignInPage />} />
           <Route path="*" element={<LoginPage />} />
         </Routes>
       </Unauthenticated>
@@ -132,6 +134,7 @@ function AuthenticatedApp() {
             </RoleGuard>
           }
         />
+        <Route path="*" element={<RoleRedirect user={user} />} />
       </Routes>
     </Layout>
   );

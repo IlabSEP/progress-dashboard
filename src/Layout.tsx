@@ -44,7 +44,7 @@ export function Layout({
                   iLab SEP
                 </p>
                 <p className="font-mono text-[9px] uppercase tracking-[0.24em] text-ink/55">
-                  Tracker · Est. 2026
+                  Progress tracker
                 </p>
               </div>
             </Link>
