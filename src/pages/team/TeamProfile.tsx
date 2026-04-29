@@ -195,7 +195,9 @@ export function TeamProfile() {
     (website !== null && website !== (user.website ?? ""));
 
   const webhookUrl =
-    import.meta.env.VITE_CONVEX_SITE_URL + "/api/github-webhook?teamId=" + user._id;
+    (import.meta.env.VITE_CONVEX_SITE_URL as string).replace(/\/$/, "") +
+    "/api/github-webhook?teamId=" +
+    user._id;
 
   return (
     <div className="bg-cream-paper text-ink-deep">
