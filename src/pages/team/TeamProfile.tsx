@@ -1,9 +1,12 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { Id } from "../../../convex/_generated/dataModel";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
+import { TutorialDialog } from "@/components/TutorialDialog";
+
+const PROFILE_TUTORIAL_SEEN_KEY = "profile.webhookTutorial.seen.v1";
 
 function FieldLabel({
   htmlFor,
@@ -124,6 +127,21 @@ export function TeamProfile() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [repoUrlInput, setRepoUrlInput] = useState("");
   const [connectingRepo, setConnectingRepo] = useState(false);
+
+  const [tutorialOpen, setTutorialOpen] = useState(false);
+  const [tutorialStep, setTutorialStep] = useState(0);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.localStorage.getItem(PROFILE_TUTORIAL_SEEN_KEY)) return;
+    setTutorialOpen(true);
+    window.localStorage.setItem(PROFILE_TUTORIAL_SEEN_KEY, "1");
+  }, []);
+
+  function openTutorial() {
+    setTutorialStep(0);
+    setTutorialOpen(true);
+  }
 
   if (!user) {
     return (
@@ -286,7 +304,14 @@ export function TeamProfile() {
                 <p className="text-sm text-ink/70">
                   Link your repository so any push with a commit message
                   prefixed <code className="rounded-sm border border-ink/15 bg-cream px-1.5 py-0.5 text-[11px]">SEP:</code> is
-                  logged to your timeline as an auto-update.
+                  logged to your timeline as an auto-update.{" "}
+                  <button
+                    type="button"
+                    onClick={openTutorial}
+                    className="border-b border-ink/30 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-deep transition-colors hover:border-vermilion hover:text-vermilion"
+                  >
+                    Watch tutorial
+                  </button>
                 </p>
                 <div className="space-y-2">
                   <FieldLabel htmlFor="repoUrl">Repository URL</FieldLabel>
@@ -404,6 +429,32 @@ export function TeamProfile() {
           </Section>
         </div>
       </div>
+
+      <TutorialDialog
+        open={tutorialOpen}
+        onOpenChange={setTutorialOpen}
+        stepIndex={tutorialStep}
+        steps={[
+          {
+            video: "WebhookShowcase",
+            eyebrow: "What it does",
+            title: "Auto-logged commits",
+            description:
+              "Push a commit prefixed with SEP: and it lands on your timeline — no manual update needed.",
+            primaryLabel: "Learn more →",
+            onPrimary: () => setTutorialStep(1),
+          },
+          {
+            video: "WebhookSetup",
+            eyebrow: "How to set it up",
+            title: "Wire your repository",
+            description:
+              "Connect your GitHub repo and add the webhook. Takes about a minute.",
+            primaryLabel: "Got it",
+            onPrimary: () => setTutorialOpen(false),
+          },
+        ]}
+      />
     </div>
   );
 }
