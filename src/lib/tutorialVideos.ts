@@ -6,7 +6,3 @@ export const TUTORIAL_VIDEOS = {
 } as const;
 
 export type TutorialKey = keyof typeof TUTORIAL_VIDEOS;
-
-export function loomEmbedUrl(id: string) {
-  return `https://www.loom.com/embed/${id}?hide_owner=true&hide_share=true&hide_title=true`;
-}
