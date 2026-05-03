@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { useQuery, useMutation } from "convex/react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { api } from "../../../convex/_generated/api";
 import { UpdateCard } from "@/components/UpdateCard";
 import { TagSelector } from "@/components/TagSelector";
@@ -8,6 +9,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import { useToast } from "@/components/ui/use-toast";
 import { Id } from "../../../convex/_generated/dataModel";
 
@@ -30,7 +38,11 @@ export function AdminTeamDetail() {
     team?.profileImage ? { storageId: team.profileImage } : { storageId: undefined }
   );
   const unlockMutation = useMutation(api.updates.unlock);
+  const deleteUserMutation = useMutation(api.users.deleteUser);
   const { toast } = useToast();
+  const navigate = useNavigate();
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   if (!team || updates === undefined) {
     return (
@@ -49,6 +61,18 @@ export function AdminTeamDetail() {
       toast({ title: "Update unlocked" });
     } catch (err: any) {
       toast({ title: err.message, variant: "destructive" });
+    }
+  };
+
+  const handleDelete = async () => {
+    setDeleting(true);
+    try {
+      await deleteUserMutation({ userId: team._id });
+      toast({ title: `${team.teamName ?? "Team"} removed` });
+      navigate("/admin");
+    } catch (err: any) {
+      toast({ title: err.message, variant: "destructive" });
+      setDeleting(false);
     }
   };
 
@@ -196,6 +220,70 @@ export function AdminTeamDetail() {
           </div>
         </>
       )}
+
+      <section className="mt-12 space-y-5">
+        <div className="border-b border-vermilion/30 pb-3">
+          <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-vermilion">
+            Danger zone
+          </p>
+          <h2 className="font-display mt-1 text-2xl italic text-ink-deep">
+            Remove this team.
+          </h2>
+        </div>
+        <div className="flex flex-wrap items-center justify-between gap-4 rounded-sm border border-vermilion/30 bg-vermilion-soft/40 p-6">
+          <p className="max-w-md text-sm text-ink/75">
+            Permanently delete this team's account, updates, commits,
+            requests, and uploaded files.{" "}
+            <span className="font-display italic text-vermilion-deep">
+              This cannot be undone.
+            </span>
+          </p>
+          <button
+            type="button"
+            onClick={() => setConfirmOpen(true)}
+            disabled={deleting}
+            className="inline-flex items-center gap-2 rounded-sm bg-vermilion px-4 py-2 font-mono text-[11px] uppercase tracking-[0.22em] text-cream-paper transition-colors hover:bg-vermilion-deep disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            Remove team →
+          </button>
+        </div>
+      </section>
+
+      <Dialog open={confirmOpen} onOpenChange={(o) => !deleting && setConfirmOpen(o)}>
+        <DialogContent className="max-w-md gap-0 overflow-hidden rounded-2xl border-ink/20 bg-cream-paper p-0 sm:rounded-2xl">
+          <div className="px-8 pt-8 pb-6">
+            <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-vermilion">
+              Confirm removal
+            </p>
+            <DialogTitle className="font-display mt-2 text-2xl italic text-ink-deep">
+              Remove {team.teamName ?? "this team"}?
+            </DialogTitle>
+            <DialogDescription className="mt-3 text-sm text-ink/70">
+              This permanently deletes the team account, all submitted
+              updates, GitHub commit history, update requests, and uploaded
+              files. This action cannot be undone.
+            </DialogDescription>
+          </div>
+          <DialogFooter className="flex items-center justify-end gap-2 border-t border-ink/15 bg-cream/40 px-8 py-4 sm:justify-end">
+            <button
+              type="button"
+              onClick={() => setConfirmOpen(false)}
+              disabled={deleting}
+              className="rounded-md border border-ink/25 bg-transparent px-4 py-2 font-mono text-[11px] uppercase tracking-[0.22em] text-ink-deep transition-colors hover:bg-cream disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={handleDelete}
+              disabled={deleting}
+              className="rounded-md bg-vermilion px-4 py-2 font-mono text-[11px] uppercase tracking-[0.22em] text-cream-paper transition-colors hover:bg-vermilion-deep disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {deleting ? "Removing…" : "Yes, remove team"}
+            </button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
