@@ -5,7 +5,6 @@ import {
   Heading,
   Hr,
   Html,
-  Preview,
   Section,
   Tailwind,
   Text,
@@ -28,8 +27,17 @@ export function VerificationCodeEmail({
     <Html>
       <Tailwind config={ilabTailwindConfig}>
         <Head />
-        <Preview>Your iLab sign-in code: {code}</Preview>
         <Body className="bg-cream m-0 p-0 font-sans">
+          <div
+            style={{
+              display: "none",
+              overflow: "hidden",
+              maxHeight: 0,
+              maxWidth: 0,
+            }}
+          >
+            Your iLab sign-in code is {code}.
+          </div>
           <Container className="max-w-[560px] mx-auto my-10 bg-creamPaper border border-solid border-[rgba(11,59,102,0.15)] rounded-md overflow-hidden">
             <Section className="bg-creamWarm px-8 py-5 border-b border-solid border-[rgba(11,59,102,0.15)]">
               <Text className="font-mono text-[10px] uppercase tracking-[0.24em] text-inkSoft m-0">

@@ -1,4 +1,5 @@
 import { Email } from "@convex-dev/auth/providers/Email";
+import { renderAsync } from "@react-email/components";
 import { alphabet, generateRandomString } from "oslo/crypto";
 import { Resend as ResendAPI } from "resend";
 import { VerificationCodeEmail } from "./VerificationCodeEmail";
@@ -16,12 +17,30 @@ export const ResendOTP = Email({
     token,
     expires,
   }) {
+    const minutes = Math.max(
+      1,
+      Math.floor((+new Date(expires) - Date.now()) / (60 * 1000))
+    );
+    const html = await renderAsync(
+      VerificationCodeEmail({ code: token, expires })
+    );
+    const text = [
+      `Your iLab sign-in code is ${token}.`,
+      "",
+      `Enter this code on the sign-in page to access your iLab SEP dashboard. It is valid for ${minutes} ${minutes === 1 ? "minute" : "minutes"}.`,
+      "",
+      "If you didn't request this code, you can safely ignore this email.",
+      "",
+      "— iLab SEP Tracker",
+    ].join("\n");
+
     const resend = new ResendAPI(provider.apiKey);
     const { error } = await resend.emails.send({
-      from: process.env.AUTH_EMAIL ?? "Log in to iLab <noreply@pingw.me>",
+      from: process.env.AUTH_EMAIL ?? "iLab SEP Tracker <noreply@pingw.me>",
       to: [email],
-      subject: `Log in to iLab`,
-      react: VerificationCodeEmail({ code: token, expires }),
+      subject: `Your iLab sign-in code is ${token}`,
+      html,
+      text,
     });
 
     if (error) {
