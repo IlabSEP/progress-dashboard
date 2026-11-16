@@ -172,7 +172,7 @@ function EventPopover({
               >
                 <span
                   className={cn(
-                    "h-2 w-2 flex-shrink-0 rounded-full",
+                    "h-2 w-2 shrink-0 rounded-full",
                     ev.kind === "update" ? "bg-sage" : "bg-ink"
                   )}
                 />
@@ -182,7 +182,7 @@ function EventPopover({
                     {formatDateTime(ev.occurredAt)} · {relativeTime(ev.occurredAt, now)}
                   </div>
                 </div>
-                <span className="flex-shrink-0 text-[11px] text-ink/40">↗</span>
+                <span className="shrink-0 text-[11px] text-ink/40">↗</span>
               </Link>
             );
           })
@@ -449,13 +449,13 @@ export function AdminDashboard() {
       </div>
 
       {/* Timeline card */}
-      <div className="overflow-hidden rounded-lg border border-ink/15 bg-cream-paper shadow-sm">
+      <div className="overflow-hidden rounded-lg border border-ink/15 bg-cream-paper shadow-xs">
         <div className="overflow-x-auto">
           <div style={{ minWidth: totalGridW }}>
             {/* Header row */}
             <div className="sticky top-0 z-10 flex border-b border-ink/15 bg-cream-warm/60">
               <div
-                className="flex-shrink-0 border-r border-ink/15 px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-ink/55"
+                className="shrink-0 border-r border-ink/15 px-4 py-2.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-ink/55"
                 style={{ width: NAME_W, minWidth: NAME_W }}
               >
                 Team
@@ -479,7 +479,7 @@ export function AdminDashboard() {
                   <div
                     key={wi}
                     className={cn(
-                      "relative flex-shrink-0",
+                      "relative shrink-0",
                       wi < data.weeks - 1 && "border-r border-ink/10",
                       req && "bg-vermilion/5 border-b-2 border-vermilion"
                     )}
@@ -520,13 +520,13 @@ export function AdminDashboard() {
                   <div
                     key={team.teamId as string}
                     className={cn(
-                      "flex transition-colors hover:bg-ink/[0.025]",
+                      "flex transition-colors hover:bg-ink/2.5",
                       ti < filteredTeams.length - 1 && "border-b border-ink/10",
                       ti % 2 === 1 && "bg-cream/40"
                     )}
                   >
                     <div
-                      className="flex flex-shrink-0 flex-col justify-center gap-1 border-r border-ink/15 px-4"
+                      className="flex shrink-0 flex-col justify-center gap-1 border-r border-ink/15 px-4"
                       style={{ width: NAME_W, minWidth: NAME_W, height: ROW_H }}
                     >
                       <Link
@@ -551,9 +551,9 @@ export function AdminDashboard() {
                         <div
                           key={wi}
                           className={cn(
-                            "relative flex-shrink-0",
+                            "relative shrink-0",
                             wi < data.weeks - 1 && "border-r border-ink/10",
-                            isReqCol && "bg-vermilion/[0.04]"
+                            isReqCol && "bg-vermilion/4"
                           )}
                           style={{ width: COL_W, minWidth: COL_W, height: ROW_H }}
                         >
@@ -563,7 +563,7 @@ export function AdminDashboard() {
                               aria-label={`${count} event${count > 1 ? "s" : ""} in week of ${weekLabels[wi]} for ${team.teamName}`}
                               onClick={(e) => handleBucketClick(e, team, wi, bucket)}
                               className={cn(
-                                "absolute inset-[5px_4px] cursor-pointer rounded transition-all focus:outline-none",
+                                "absolute inset-[5px_4px] cursor-pointer rounded transition-all focus:outline-hidden",
                                 bucket.hasUpdate ? "bg-sage" : "bg-ink",
                                 "hover:opacity-90 hover:ring-2 hover:ring-ink-deep",
                                 isOpen && "ring-2 ring-ink-deep"
@@ -585,7 +585,7 @@ export function AdminDashboard() {
                               aria-label={`No response to ${bucket.unfulfilledRequestTitle}`}
                               onClick={(e) => handleBucketClick(e, team, wi, bucket)}
                               className={cn(
-                                "absolute inset-[5px_4px] cursor-pointer rounded border-2 border-dashed border-vermilion bg-vermilion/10 transition-colors hover:bg-vermilion/15 focus:outline-none",
+                                "absolute inset-[5px_4px] cursor-pointer rounded border-2 border-dashed border-vermilion bg-vermilion/10 transition-colors hover:bg-vermilion/15 focus:outline-hidden",
                                 isOpen && "ring-2 ring-vermilion"
                               )}
                               title={`No response to ${bucket.unfulfilledRequestTitle}`}

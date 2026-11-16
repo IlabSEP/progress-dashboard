@@ -170,7 +170,7 @@ export function RequestUpdate() {
       </div>
 
       {/* Compose */}
-      <div className="rounded-lg border border-ink/15 bg-cream-paper shadow-sm">
+      <div className="rounded-lg border border-ink/15 bg-cream-paper shadow-xs">
         <div className="border-b border-ink/10 bg-cream-warm/40 px-4 py-2.5">
           <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-ink/55">
             Compose
@@ -207,7 +207,7 @@ export function RequestUpdate() {
       </div>
 
       {/* Recipients */}
-      <div className="rounded-lg border border-ink/15 bg-cream-paper shadow-sm">
+      <div className="rounded-lg border border-ink/15 bg-cream-paper shadow-xs">
         <div className="flex items-center justify-between border-b border-ink/10 bg-cream-warm/40 px-4 py-2.5">
           <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-ink/55">
             Recipients
@@ -288,7 +288,7 @@ export function RequestUpdate() {
                       "flex cursor-pointer items-center gap-3 px-4 py-2.5 transition-colors",
                       checked
                         ? "bg-sage/10 hover:bg-sage/15"
-                        : "hover:bg-ink/[0.025]"
+                        : "hover:bg-ink/2.5"
                     )}
                   >
                     <input
@@ -354,7 +354,7 @@ export function RequestUpdate() {
           pendingRequests.map((r) => r.teamId as string)
         );
         return (
-        <div className="rounded-lg border border-ink/15 bg-cream-paper shadow-sm">
+        <div className="rounded-lg border border-ink/15 bg-cream-paper shadow-xs">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-ink/10 bg-cream-warm/40 px-4 py-2.5">
             <div className="flex items-center gap-3">
               <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-ink/55">
@@ -441,7 +441,7 @@ export function RequestUpdate() {
                     variant="outline"
                     size="sm"
                     onClick={() => void handleCancel(req._id)}
-                    className="h-7 flex-shrink-0 border-vermilion/40 px-3 text-[11.5px] text-vermilion hover:bg-vermilion/10 hover:text-vermilion-deep"
+                    className="h-7 shrink-0 border-vermilion/40 px-3 text-[11.5px] text-vermilion hover:bg-vermilion/10 hover:text-vermilion-deep"
                   >
                     Cancel
                   </Button>

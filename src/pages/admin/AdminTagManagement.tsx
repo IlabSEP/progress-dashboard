@@ -134,7 +134,7 @@ export function AdminTagManagement() {
       </div>
 
       {/* Create new tag */}
-      <div className="rounded-lg border border-ink/15 bg-cream-paper shadow-sm">
+      <div className="rounded-lg border border-ink/15 bg-cream-paper shadow-xs">
         <div className="border-b border-ink/10 bg-cream-warm/40 px-4 py-2.5">
           <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-ink/55">
             Create new tag
@@ -162,7 +162,7 @@ export function AdminTagManagement() {
       </div>
 
       {/* Existing tags */}
-      <div className="rounded-lg border border-ink/15 bg-cream-paper shadow-sm">
+      <div className="rounded-lg border border-ink/15 bg-cream-paper shadow-xs">
         <div className="flex items-center justify-between border-b border-ink/10 bg-cream-warm/40 px-4 py-2.5">
           <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-ink/55">
             All tags
@@ -214,8 +214,8 @@ export function AdminTagManagement() {
                     className={cn(
                       "flex items-center gap-3 px-4 py-3 transition-colors",
                       !isEditing &&
-                        "cursor-pointer hover:bg-ink/[0.025] focus:bg-ink/[0.03] focus:outline-none",
-                      isExpanded && "bg-ink/[0.02]"
+                        "cursor-pointer hover:bg-ink/2.5 focus:bg-ink/3 focus:outline-hidden",
+                      isExpanded && "bg-ink/2"
                     )}
                   >
                     {isEditing ? (
@@ -254,7 +254,7 @@ export function AdminTagManagement() {
                       <>
                         <ChevronDownIcon
                           className={cn(
-                            "h-4 w-4 flex-shrink-0 text-ink/45 transition-transform",
+                            "h-4 w-4 shrink-0 text-ink/45 transition-transform",
                             isExpanded && "rotate-0",
                             !isExpanded && "-rotate-90"
                           )}
@@ -440,7 +440,7 @@ function AssignmentPanel({
                     "flex cursor-pointer items-center gap-2 rounded-md border px-2.5 py-1.5 transition-colors",
                     isAssigned
                       ? "border-sage/40 bg-sage/10 text-ink-deep hover:bg-sage/15"
-                      : "border-ink/10 bg-cream-paper text-ink-deep/80 hover:border-ink/25 hover:bg-ink/[0.03]"
+                      : "border-ink/10 bg-cream-paper text-ink-deep/80 hover:border-ink/25 hover:bg-ink/3"
                   )}
                 >
                   <input

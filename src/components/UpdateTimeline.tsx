@@ -70,12 +70,12 @@ export function UpdateTimeline() {
           >
             {/* Dot on the rail */}
             <span
-              className={`absolute -left-[41px] top-4 block h-3 w-3 rounded-full ring-4 ring-cream-paper ${
+              className={`absolute left-[-41px] top-4 block h-3 w-3 rounded-full ring-4 ring-cream-paper ${
                 isUpdate ? "bg-ink-deep" : "bg-vermilion"
               }`}
             />
             {/* Tiny date rail-tick */}
-            <span className="absolute -left-[90px] top-3 hidden w-11 text-right font-mono text-[10px] uppercase tracking-[0.2em] text-ink/45 md:block">
+            <span className="absolute left-[-90px] top-3 hidden w-11 text-right font-mono text-[10px] uppercase tracking-[0.2em] text-ink/45 md:block">
               {timeShort}
             </span>
 

@@ -152,7 +152,7 @@ function VentureSketch() {
             onChange={(e) => setTitle(e.target.value)}
             placeholder={placeholder}
             maxLength={32}
-            className="mt-2 w-full border-b border-ink/30 bg-transparent pb-2 font-display text-4xl italic text-ink-deep placeholder:text-ink/25 focus:border-vermilion focus:outline-none"
+            className="mt-2 w-full border-b border-ink/30 bg-transparent pb-2 font-display text-4xl italic text-ink-deep placeholder:text-ink/25 focus:border-vermilion focus:outline-hidden"
           />
         </div>
 

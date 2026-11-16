@@ -41,7 +41,7 @@ export function AdminViewCommit() {
         </Button>
       </div>
 
-      <div className="rounded-lg border border-ink/15 bg-cream-paper p-6 shadow-sm">
+      <div className="rounded-lg border border-ink/15 bg-cream-paper p-6 shadow-xs">
         <div className="mb-4 flex items-start justify-between gap-4">
           <div>
             <div className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink/55">
@@ -58,7 +58,7 @@ export function AdminViewCommit() {
           </Button>
         </div>
 
-        <pre className="whitespace-pre-wrap break-words rounded-md border border-ink/10 bg-cream/50 p-4 font-mono text-[13px] leading-relaxed text-ink-deep">
+        <pre className="whitespace-pre-wrap wrap-break-word rounded-md border border-ink/10 bg-cream/50 p-4 font-mono text-[13px] leading-relaxed text-ink-deep">
 {commit.message}
         </pre>
 

@@ -30,7 +30,7 @@ export function Layout({
 }) {
   return (
     <div className="flex min-h-screen w-full flex-col bg-cream-paper text-ink-deep">
-      <header className="sticky top-0 z-10 border-b border-ink/15 bg-cream-paper/90 backdrop-blur">
+      <header className="sticky top-0 z-10 border-b border-ink/15 bg-cream-paper/90 backdrop-blur-sm">
         <nav className="container flex w-full items-center justify-between gap-6 py-4">
           <div className="flex items-center gap-8">
             <Link to="/" className="group flex items-center gap-3">

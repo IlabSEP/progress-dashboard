@@ -32,7 +32,7 @@ export function UserMenu({ children }: { children: ReactNode }) {
           <button
             type="button"
             aria-label="Open user menu"
-            className="group relative h-10 w-10 overflow-hidden rounded-full border border-ink/25 bg-cream transition-colors hover:border-vermilion focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-vermilion focus-visible:ring-offset-2 focus-visible:ring-offset-cream-paper"
+            className="group relative h-10 w-10 overflow-hidden rounded-full border border-ink/25 bg-cream transition-colors hover:border-vermilion focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-vermilion focus-visible:ring-offset-2 focus-visible:ring-offset-cream-paper"
           >
             {profileImageUrl ? (
               <img

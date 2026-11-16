@@ -1,6 +1,5 @@
 import { Email } from "@convex-dev/auth/providers/Email";
-import { renderAsync } from "@react-email/components";
-import { alphabet, generateRandomString } from "oslo/crypto";
+import { render } from "@react-email/components";
 import { Resend as ResendAPI } from "resend";
 import { VerificationCodeEmail } from "./VerificationCodeEmail";
 
@@ -9,7 +8,12 @@ export const ResendOTP = Email({
   apiKey: process.env.AUTH_RESEND_KEY,
   maxAge: 60 * 20,
   async generateVerificationToken() {
-    return generateRandomString(4, alphabet("0-9"));
+    // Rejection sampling keeps the 4 digits uniformly random.
+    const limit = 2 ** 32 - (2 ** 32 % 10_000);
+    const buf = new Uint32Array(1);
+    do crypto.getRandomValues(buf);
+    while (buf[0] >= limit);
+    return String(buf[0] % 10_000).padStart(4, "0");
   },
   async sendVerificationRequest({
     identifier: email,
@@ -21,7 +25,7 @@ export const ResendOTP = Email({
       1,
       Math.floor((+new Date(expires) - Date.now()) / (60 * 1000))
     );
-    const html = await renderAsync(
+    const html = await render(
       VerificationCodeEmail({ code: token, expires })
     );
     const text = [

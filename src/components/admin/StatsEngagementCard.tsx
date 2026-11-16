@@ -53,7 +53,7 @@ export function StatsEngagementCard({
               onClick={() => onBucketToggle(b.key)}
               className={cn(
                 "group flex w-full items-center gap-3 rounded px-2 py-1.5 text-left transition-colors",
-                !disabled && "hover:bg-ink/[0.04]",
+                !disabled && "hover:bg-ink/4",
                 isActive && "bg-ink/5 ring-1 ring-ink/40",
                 disabled && "opacity-55"
               )}
@@ -61,7 +61,7 @@ export function StatsEngagementCard({
               <span className="w-20 shrink-0 font-mono text-[11px] text-ink/70">
                 {b.label}
               </span>
-              <div className="relative h-5 flex-1 overflow-hidden rounded-sm bg-ink/[0.05]">
+              <div className="relative h-5 flex-1 overflow-hidden rounded-sm bg-ink/5">
                 <div
                   className={cn("h-full rounded-sm transition-all", COLORS[b.key])}
                   style={{ width: `${widthPct}%` }}

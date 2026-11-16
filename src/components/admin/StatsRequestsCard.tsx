@@ -125,7 +125,7 @@ export function StatsRequestsCard({
                     style={{ height: `${fulfilledPct}%` }}
                   />
                 </div>
-                <p className="font-mono text-[9px] uppercase tracking-[0.1em] text-ink/55">
+                <p className="font-mono text-[9px] uppercase tracking-widest text-ink/55">
                   {formatMonth(m.monthStartMs)}
                 </p>
               </div>

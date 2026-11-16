@@ -51,7 +51,7 @@ function Card({
     <div
       className={cn(
         "flex h-full flex-col justify-between rounded-lg border border-ink/15 bg-cream-paper px-4 py-3 transition-colors",
-        href && "hover:border-ink/30 hover:bg-ink/[0.03]"
+        href && "hover:border-ink/30 hover:bg-ink/3"
       )}
     >
       <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink/55">
