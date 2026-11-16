@@ -1,8 +1,8 @@
-name: Deploy to GitHub Pages
+name: Build and deploy
 
 on:
   push:
-    branches: [main]
+    branches: [main, dev]
   workflow_dispatch:
 
 permissions:
@@ -10,8 +10,9 @@ permissions:
   pages: write
   id-token: write
 
+# Per branch, so a dev push never cancels a main deploy.
 concurrency:
-  group: pages
+  group: pages-${{ github.ref_name }}
   cancel-in-progress: true
 
 env:
@@ -20,6 +21,11 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # main → prod (GitHub Pages), anything else → dev (Cloudflare Pages).
+    environment: ${{ github.ref_name == 'main' && 'prod' || 'dev' }}
+    env:
+      VITE_CONVEX_SITE_URL: ${{ vars.VITE_CONVEX_SITE_URL }}
+      VITE_CONVEX_URL: ${{ vars.VITE_CONVEX_URL }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -27,16 +33,29 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: npm run build
-        env:
-          VITE_CONVEX_SITE_URL: ${{ secrets.VITE_CONVEX_SITE_URL }}
-          VITE_CONVEX_URL: ${{ secrets.VITE_CONVEX_URL }}
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+
+      - if: github.ref_name == 'main'
+        run: npm run build
+      - if: github.ref_name == 'main'
+        uses: actions/configure-pages@v5
+      - if: github.ref_name == 'main'
+        uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
+      # Cloudflare serves from the root, and its built-in SPA fallback only
+      # kicks in when there is no 404.html (that file is the GitHub Pages workaround).
+      - if: github.ref_name != 'main'
+        run: npm run build -- --base=/ && rm dist/404.html
+      - if: github.ref_name != 'main'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=progress-dashboard-dev --branch=dev
+
   deploy:
+    if: github.ref_name == 'main'
     needs: build
     runs-on: ubuntu-latest
     environment:

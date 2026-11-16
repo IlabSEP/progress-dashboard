@@ -1,10 +1,23 @@
 # progress-dashboard
 
+Welcome to the [SEP](https://www.ntu.edu.sg/i-lab/research-focus/student-entrepreneurship-program-\(sep\)) Tracker github repository! I will try my best to explain how everything works here, so that you can pick up and continue maintaining it.  
 
-Sample Text
+### Quick links to deployments
+dev deployment: https://progress-dashboard-dev.pages.dev  
+prod deployment: https://ilabsep.github.io/progress-dashboard/  
 
-Video Ids
-kg26s9nekkmhhv5fsfwcwbwvs985rt8y - AccountCreation
-kg20btyvga5cd4hg84r37jy5fn85rq2b - ManualUpdate
-kg28t2bz2ay97v22nk48y4421d85s461 - WebhookSetup
-kg2232fth1bca1fhdtpjgnq73h85r9e6 - WebhookShowcase
+### Services used:
+- [Clerk](https://clerk.com) (Auth & Email OTP Provider)
+- [Convex](https://convex.dev) (Database & Backend Compute Provider)
+- [Cloudflare](https://cloudflare.com) (dev deployment host, since github pages only allows for one deployment)
+- Github Pages (obviously)
+
+All of these services are signed in using "Sign in with Github" using [iLabSEP](https://github.com/IlabSEP)'s account, so do get login credentials from whoever is in charge of iLab (at the time of writing it is [Jian Xin](mailto:jianxin.lim@ntu.edu.sg) and [Mr Teo](mailto:ASCETEO@ntu.edu.sg), please update this if there are changes)
+> I reccomend using another [browser](https://zen-browser.app/) that stays logged into SEP related accounts, and use that for everything  
+
+### Requirements
+Check that you have the following files:
+```
+.env.development
+.env.production
+```
